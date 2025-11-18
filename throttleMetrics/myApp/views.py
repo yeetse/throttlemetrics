@@ -5,5 +5,5 @@ from django.shortcuts import render
 def index(request):
     return render(request, "myApp/index.html", {})
 
-def post(request):
-    return render(request, "myApp/post.html", {})
+def post1(request):
+    return render(request, "myApp/post1.html", {})
