@@ -57,24 +57,35 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
+                        <!-- INTRO -->
                         <p>Interlagos once again gave us an absolute masterclass of driving by Max Verstappen, who finished P3 after starting the race from the pitlane due to extensive changes being made on his car under Parc Ferme conditions. The most significant change was the installation of a new Honda power unit.</p>
                         <p>In a season, Formula 1 teams are only allowed to use a certain number of engines. For the 2024 and 2025 seasons, the amount is four. This means that each engine needs to last for around five to six races. If a driver goes over this allotted amount, they receive grid penalties. However, the benefit to replacing the car's power unit is that it can be run on a more aggressive setting since it doesn't need to last as long, the result being performance benefits.</p>
                         <p>This is where the line gets muddied.</p>
                         <p>Current regulations do not specify when engine changes need to be included in a team's cost cap spending and when they don't. They only state that teams need to have good reasoning for engine changes if they are to not be included. Understandably, Red Bull's action at Interlagos raised McLaren's eyebrows, who believes that engine changes for performance benefit should come out of a team's cost cap. The FIA's clarification on this matter is crucial since if Red Bull is not financially penalized, McLaren could employ the same strategy for their drivers. </p>
                         <p>However, exactly how much of a performance boost does this provide? How much of a performance boost did this provide Verstappen? Using data from previous years' races where circumstances were the same, we can answer (or attempt to, at least) this question.</p>
+
+                        <!-- SECTION 1 -->
                         <h2 class="section-heading">2021 Italian GP - Bottas</h2>
                         <p>Mercedes changed Valtteri Bottas's engine before the race on Sunday, sending him to the back of the starting grid. Across all the racing laps which were not impeded by safety car deployments or other slow lap scenarios, his average top speed was 339.54 kph whereas Hamilton's was 337.13 kph. Bottas had a top speed of 359 kph whereas Hamilton had a top speed of 354 kph. </p>
-                        <p>By comparison, the field average top speed was 332.26 kph, and the field median was 332 kph. ADD AVG SPEED</p>
-                        <p>The important question now is whether the speed difference between Bottas and Hamilton is significant enough to where we can say that the engine swap had noticeable performance gains. We can get the top speed of each lap in the intersection of laps completed by both drivers and plot them. This is shown in Figure 1.</p>
-                        <img class="img-fluid" src="{% static 'assets/img/Bot_Ham_21_Monza_TopSpeed.png' %}" alt="..." />
-                        <span class="caption text-muted">Figure 1. A plot of each driver's top speed for each lap out of the laps they both completed.</span>
-                        <p>Spaceflights cannot be stopped. This is not the work of any one man or even a group of men. It is a historical process which mankind is carrying out in accordance with the natural laws of human development.</p>
-                        <h2 class="section-heading">Reaching for the Stars</h2>
-                        <p>As we got further and further away, it [the Earth] diminished in size. Finally it shrank to the size of a marble, the most beautiful you can imagine. That beautiful, warm, living object looked so fragile, so delicate, that if you touched it with a finger it would crumble and fall apart. Seeing this has to change a man.</p>
-                        <a href="#!"><img class="img-fluid" src="{% static 'assets/img/post-sample-image.jpg' %}" alt="..." /></a>
-                        <span class="caption text-muted">To go places and do things that have never been done before – that’s what living is all about.</span>
-                        <p>Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds, to seek out new life and new civilizations, to boldly go where no man has gone before.</p>
-                        <p>As I stand out here in the wonders of the unknown at Hadley, I sort of realize there’s a fundamental truth to our nature, Man must explore, and this is exploration at its greatest.</p>
+                        <p>By comparison, the field average top speed was 332.26 kph, and the field median was 332 kph. The field's average speed was 237.87 kph, whereas Bottas's was 239.23 and Hamilton's was 238.15.</p>
+                        <p>The important question now is whether the speed difference between Bottas and Hamilton is significant enough to where we can say that the engine swap had noticeable performance gains. We can get the top speed of each lap in the intersection of laps completed by both drivers and plot them. Their speed is compared to the field's average top speed for each corresponding lap. This is shown in Figure 1.</p>
+                        <img class="img-fluid" src="{% static 'assets/img/Bot_Ham_Field_21_Monza_TopSpeed.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 1. A plot of each driver's top speed for each lap out of the laps they both completed compared to the field's average top speed.</span>
+                        <p>We can also get the average speed of each driver's laps and compare them to the field's average for each corresponding lap. This is shown in Figure 2.</p>
+                        <img class="img-fluid" src="{% static 'assets/img/Bot_Ham_Field_21_Monza_AvgSpeed.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 2. A plot of each driver's average speed for each lap out of the laps they both completed compared to the field's average speed.</span>
+                        <p>These show us that while Bottas had instances when he achieved higher top speeds and average speeds than his teammate, this advantage was likely overshadowed by Hamilton's pure race pace and racecraft (up until his incident with Max on lap 26). That being said, when Bottas did achieve higher top speeds, he usually did so by a considerable margin. This is displayed on laps 8,9, 16, 17, 21, and 22. Now, it is unclear to say precisely whether these gains were from the new power unit or other circumstances. However, we can make an informed guess. Figures 3 and 4 can help us with this.</p>
+                        <img class="img-fluid" src="{% static 'assets/img/BOT_tire_evolution_Italian Grand Prix_2021.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 3. A plot of Valtteri Bottas's tire evolution over the course of the 2021 Italian Grand Prix.</span>
+                        <img class="img-fluid" src="{% static 'assets/img/HAM_tire_evolution_Italian Grand Prix_2021.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 4. A plot of Lewis Hamilton's tire evolution over the course of the 2021 Italian Grand Prix.</span>
+                        <p>These figures show us that for these laps (8, 9, 16, 17, 21, 22), Bottas and Hamilton were running the exact same age tire and tire compound. Because of this, we can rule out the tires playing a role in the speed difference. Moreover, since the laps plotted are non-slow laps (meaning that laps behind safety car and pit-out laps are excluded), we can eliminate these as a cause, too.</p>
+                        <p>Therefore, it is highly likely that Bottas's power unit swap gave him that extra speed boost over his teammate in scenarios where Hamilton couldn't outdrive Bottas on pure racecraft. On a high-speed track like Monza, this top speed advantage is greatly beneficial.</p>
+
+
+                        <!-- SECTION 2 -->
+                        <h2 class="section-heading">2021 Russian GP - Bottas</h2>
+
                         <p>
                             Placeholder text by
                             <a href="http://spaceipsum.com/">Space Ipsum</a>
