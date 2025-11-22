@@ -22,5 +22,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.index, name="index"),
-    path("down-but-not-out/", views.post1, name="post1")
+    path("down-but-not-out/", views.post1, name="post1"),
+    path("about/", views.about, name="about"),
+    path("contact/", views.contact, name="contact")
 ]
