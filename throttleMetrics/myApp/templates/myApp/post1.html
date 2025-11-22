@@ -34,14 +34,13 @@
             </div>
         </nav>
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+        <header class="masthead" style="background-image: url({% static 'assets/img/Verstappen_Interlagos.jpg' %})">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="post-heading">
                             <h1>Power Unit Pick-Me-Up</h1>
-                            <h2 class="subheading">How Much of Max Verstappen’s Pitlane-To-P3 Comeback at Interlagos
-                                Was Due to the New Engine? Did Red Bull Open Pandora's box?</h2>
+                            <h2 class="subheading">Does a New Engine Really Lead to Speed Gains?</h2>
                             <span class="meta">
                                 Posted by
                                 <a href="https://yrtphotography.vercel.app/" target="_blank">Yeeva Tsewang</a>
@@ -85,10 +84,27 @@
 
                         <!-- SECTION 2 -->
                         <h2 class="section-heading">2022 United States GP - Perez, Alonso, Zhou, Ocon</h2>
-                        <p>Now, let's switch to the ground effect era cars. The 2022 US GP at the Circuit of the Americas (COTA) saw five drivers undergo engine replacements, with all receiving grid penalties. At COTA, like at Monza, top speed is highly beneficial because of the long straights and high-speed corners.</p>
-                        <p>We can compare the top speeds of these drivers to their teammates. This is shown in Figure 5. Charles Leclerc is being excluded here since his teammate Carlos Sainz only completed one lap before DNFing, and it would therefore not be an accurate comparison.</p>
-                        <img class="img-fluid" src="{% static 'assets/img/[11, 1, 14, 31, 24, 77]_Field_2022_United States Grand Prix_TopSpeed.png' %}" alt="..." />
-                        <span class="caption text-muted">Figure 5. A plot comparing the top speed of drivers that got engine replacements to the top speed of the rest of the field.</span>
+                        <p>Now, let's switch to the ground effect era cars. The 2022 US GP at the Circuit of the Americas (COTA) saw five drivers undergo engine replacements, with all receiving grid penalties. These drivers were Sergio Perez, Fernando Alonso, Guanyu Zhou, Esteban Ocon, and Charles Leclerc. At COTA, like at Monza, top speed is highly beneficial because of the long straights and high-speed corners.</p>
+                        <p>We can compare the top speeds and average speeds of these drivers to their teammates and the field. This is shown in Figures 5 through 10. Charles Leclerc is being excluded here since his teammate Carlos Sainz only completed one lap before DNFing, and it would therefore not be an accurate comparison.</p>
+                        <p>A common theme in the data is that when the driver with the fresh engine has a higher top speed than his teammate and the field, it is by a large margin. It's important to observe how the top speeds of Alonso and Ocon coincide almost perfectly (Figure 7).</p>
+                        <p>When looking at average speeds, we also see instances of the fresher-engined car getting speed advantages, but it's to a lesser extent. Furthermore, aspects like racecraft and driver skill level comes into play when measuring average speed. This is seen in Alonso holding the advantage over Ocon for the majority of the race (Figure 8) even though they both received new engines. </p>
+                        <p>All teammates also ran nearly the same tire strategy. Perez opted for Medium-Hard-Medium, pitting on laps 14 and 38; Verstappen also opted for Medium-Hard-Medium, pitting on laps 13 and 35. Zhou opted for Medium-Hard-Hard, pitting on laps 9 and 23; before Bottas retired on lap 16, he also ran a Medium-Hard setup, pitting on lap 10. Alonso and Ocon ran mostly the same setup. Ocon ran Hard-Hard-Medium, pitting on laps 18 and 45. Alonso ran Hard-Medium-Hard, pitting on laps 18 and 22 as a result of his crash with Lance Stroll. This explains Ocon's sudden spike in average speed (Figure 8) over his teammate around lap 46, exactly one lap after pitting for Mediums.</p>
+                        <img class="img-fluid" src="{% static 'assets/img/[11, 1]_Field_2022_United States Grand Prix_TopSpeed.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 5. A plot comparing the top speed of Sergio Perez to his teammate Max Verstappen as well as to the top speed of the rest of the field.</span>
+                        <img class="img-fluid" src="{% static 'assets/img/[11, 1]_Field_2022_United States Grand Prix_AvgSpeed.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 6. A plot comparing the average speed of Sergio Perez to his teammate Max Verstappen as well as to the average speed of the rest of the field.</span>
+                        <img class="img-fluid" src="{% static 'assets/img/[14, 31]_Field_2022_United States Grand Prix_TopSpeed.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 7. A plot comparing the top speed of Fernando Alonso to his teammate Esteban Ocon as well as to the top speed of the rest of the field.</span>
+                        <img class="img-fluid" src="{% static 'assets/img/[14, 31]_Field_2022_United States Grand Prix_AvgSpeed.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 8. A plot comparing the average speed of Fernando Alonso to his teammate Esteban Ocon as well as to the average speed of the rest of the field.</span>
+                        <img class="img-fluid" src="{% static 'assets/img/[24, 77]_Field_2022_United States Grand Prix_TopSpeed.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 9. A plot comparing the top speed of Zhou Guanyu to his teammate Valtteri Bottas as well as to the top speed of the rest of the field.</span>
+                        <img class="img-fluid" src="{% static 'assets/img/[24, 77]_Field_2022_United States Grand Prix_AvgSpeed.png' %}" alt="..." />
+                        <span class="caption text-muted">Figure 10. A plot comparing the top speed of Zhou Guanyu to his teammate Valtteri Bottas as well as to the top speed of the rest of the field.</span>
+
+                        <!-- SECTION 2 -->
+                        <h2 class="section-heading">Takeaways</h2>
+                        <p>All this is to say that</p>
                         <p>
                             Placeholder text by
                             <a href="http://spaceipsum.com/">Space Ipsum</a>
