@@ -2,7 +2,7 @@
   "builds": [{
     "src": "throttleMetrics/wsgi.py",
     "use": "@vercel/python",
-    "config": { "maxLambdaSize": "35mb", "runtime": "python3.12" }
+    "config": { "maxLambdaSize": "40mb", "runtime": "python3.12" }
   }],
   "routes": [
     {
