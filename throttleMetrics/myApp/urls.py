@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # add new pages to here
 urlpatterns = [
@@ -26,3 +27,5 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact")
 ]
+
+urlpatterns += staticfiles_urlpatterns()
