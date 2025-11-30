@@ -23,9 +23,10 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.index, name="index"),
-    path("Power-Unit-Pick-Me-Up/", views.post1, name="post1"),
     path("about/", views.about, name="about"),
-    path("contact/", views.contact, name="contact")
+    path("contact/", views.contact, name="contact"),
+    path("Power-Unit-Pick-Me-Up/", views.post1, name="post1"),
+    path("Drastic-Situations-Call-For-Drastic-Measures/", views.post2, name="post2")
 ]
 
 urlpatterns += staticfiles_urlpatterns()

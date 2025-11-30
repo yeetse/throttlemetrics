@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Throttlemetrics</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index' %}" target="_blank">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}" target="_blank">About</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'contact' %}" target="_blank">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({% static 'assets/img/vegas.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>Drastic Situations Call for Drastic Measures</h1>
+                    <h2 class="subheading">Just How Much Was Lando Norris Lifting-And-Coasting?</h2>
+                    <span class="meta">
+                        Posted by
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">Yeeva Tsewang</a>
+                        on November 29, 2025
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- INTRO -->
+                <p>After a shocking double disqualification for McLaren, Max Verstappen now stands equal on points with Oscar Piastri and only 24 points behind Lando Norris. Both McLarens were disqualified due to excess skid block wear. It seems that the team was aware of this issue during the race, instructing Norris to lift-and-coast at the end of the straights.</p>
+                <p>However, just how much was Norris LICO-ing? Prior to being disqualified, Norris finished 20.741 seconds behind Verstappen. At first glance, this huge gap could be explained away by Verstappen's pure racecraft and pace. This, however, is not taking into account the extreme lifting Norris was performing as the race went on.</p>
+
+
+                <!-- SECTION 1 -->
+                <h2 class="section-heading">2021 Italian GP - Bottas</h2>
+                <p>By comparison, the field average top speed was 332.26 kph, and the field median was 332 kph. The field's average speed was 237.87 kph, whereas Bottas's was 239.23 and Hamilton's was 238.15.</p>
+                <img class="img-fluid" src="/static/assets/img/77_44_Field_2021_Italy_AvgSpeed.png" alt="..." />
+                <span class="caption text-muted">Figure 2. A plot of each driver's average speed for each lap out of the laps they both completed compared to the field's average speed.</span>
+                <p>These figures show us that for these laps (9, 16, 17, 21, 22), Bottas and Hamilton were running the exact same age tire and tire compound. Because of this, we can rule out the tires playing a role in the speed difference. Moreover, since the laps plotted are non-slow laps (meaning that laps behind safety car and pit-out laps are excluded), we can eliminate these as a cause, too.</p>
+                <p>Therefore, it is highly likely that Bottas's power unit swap gave him that extra speed boost over his teammate in scenarios where Hamilton couldn't outdrive Bottas on pure racecraft. On a high-speed track like Monza, this top speed advantage is greatly beneficial.</p>
+
+                <!-- SECTION 2 -->
+                <h2 class="section-heading">2022 United States GP - Perez, Alonso, Zhou, Ocon</h2>
+                <p>Now, let's switch to the ground effect era cars. The 2022 US GP at the Circuit of the Americas (COTA) saw five drivers undergo engine replacements, with all receiving grid penalties. These drivers were Sergio Perez, Fernando Alonso, Guanyu Zhou, Esteban Ocon, and Charles Leclerc. At COTA, like at Monza, top speed is highly beneficial because of the long straights and high-speed corners.</p>
+                <p>We can compare the top speeds and average speeds of these drivers to their teammates and the field. This is shown in Figures 5 through 10. Charles Leclerc is being excluded here since his teammate Carlos Sainz only completed one lap before DNFing, and it would therefore not be an accurate comparison.</p>
+                <p>A common theme in the data is that when the driver with the fresh engine has a higher top speed than his teammate and the field, it is by a large margin. It's important to observe how the top speeds of Alonso and Ocon coincide almost perfectly (Figure 7).</p>
+                <img class="img-fluid" src="/static/assets/img/14_31_Field_2022_United_States_Grand_Prix_TopSpeed.png" alt="..." />
+                <span class="caption text-muted">Figure 7. A plot comparing the top speed of Fernando Alonso to his teammate Esteban Ocon as well as to the top speed of the rest of the field.</span>
+
+                <!-- SECTION 3 -->
+                <h2 class="section-heading">Takeaways</h2>
+                <p>All this is to say that when it comes to performance, any bit of upgrade helps and a new engine certainly helps. This is critical, especially since McLaren has two drivers in contention for the title. If one of them has a poor qualifying session and ends up in the midfield, then why not replace the car's engine?</p>
+                <p>Like we've seen above, a new engine is not some cheat code; driver skill does still matter. However, with the final few races on the horizon, any boost in power is welcomed by the championship contenders.</p>
+
+            </div>
+        </div>
+    </div>
+</article>
+<!-- Footer-->
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fas fa-camera fa-stack-1x fa-inverse"></i>
+                                    </span>
+                        </a>
+                    </li>
+                    <!--
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                -->
+                    <div class="small text-center text-muted fst-italic">Copyright &copy; Throttlemetrics 2025</div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
