@@ -58,29 +58,54 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <!-- INTRO -->
                 <p>After a shocking double disqualification for McLaren, Max Verstappen now stands equal on points with Oscar Piastri and only 24 points behind Lando Norris. Both McLarens were disqualified due to excess skid block wear. It seems that the team was aware of this issue during the race, instructing Norris to lift-and-coast at the end of the straights.</p>
-                <p>However, just how much was Norris LICO-ing? Prior to being disqualified, Norris finished 20.741 seconds behind Verstappen. At first glance, this huge gap could be explained away by Verstappen's pure racecraft and pace. This, however, is not taking into account the extreme lifting Norris was performing as the race went on.</p>
+                <p>However, just how much was Norris LICO(Lift-and-Coast)-ing? Prior to being disqualified, Norris finished 20.741 seconds behind Verstappen. At first glance, this huge gap could be explained away by Verstappen's pure racecraft and pace. This, however, is not taking into account the extreme lifting Norris was performing as the race went on.</p>
 
 
                 <!-- SECTION 1 -->
-                <h2 class="section-heading">2021 Italian GP - Bottas</h2>
-                <p>By comparison, the field average top speed was 332.26 kph, and the field median was 332 kph. The field's average speed was 237.87 kph, whereas Bottas's was 239.23 and Hamilton's was 238.15.</p>
-                <img class="img-fluid" src="/static/assets/img/77_44_Field_2021_Italy_AvgSpeed.png" alt="..." />
-                <span class="caption text-muted">Figure 2. A plot of each driver's average speed for each lap out of the laps they both completed compared to the field's average speed.</span>
-                <p>These figures show us that for these laps (9, 16, 17, 21, 22), Bottas and Hamilton were running the exact same age tire and tire compound. Because of this, we can rule out the tires playing a role in the speed difference. Moreover, since the laps plotted are non-slow laps (meaning that laps behind safety car and pit-out laps are excluded), we can eliminate these as a cause, too.</p>
-                <p>Therefore, it is highly likely that Bottas's power unit swap gave him that extra speed boost over his teammate in scenarios where Hamilton couldn't outdrive Bottas on pure racecraft. On a high-speed track like Monza, this top speed advantage is greatly beneficial.</p>
+                <h2 class="section-heading">Analysis</h2>
+                <p>To get an accurate comparison of the time delta between Norris and Verstappen, we first get the laps where the former was P2 and the latter was P1. These were from laps 17 to 22 and 34 to 50 (the end of the race). The time delta after each lap can then be found and plotted. This is shown in Figure 1.</p>
+                <img class="img-fluid" src="/static/assets/img/vegas25_delta.png" alt="..." />
+                <span class="caption text-muted">Figure 1. A scatterplot of the time delta between Verstappen in P1 and Norris in P2. The gap in the middle with no data points represents instances when Norris was not in P2.</span>
+                <p>We see a steady increase in the gap between the drivers up until lap 46, which sees a sudden spike. This spike increases after each successive lap until lap 50. We can track this pattern with telemetry data, which effectively conveys the story of the race.</p>
+
+                <h2 class="section-heading">Lap 17</h2>
+                <img class="img-fluid" src="/static/assets/img/vegas25_lap17.png" alt="..." />
+                <span class="caption text-muted">Figure 2. Comparison of Norris vs Verstappen's telemetry on lap 17 (The first lap where Norris is P2 and Verstappen is P1).</span>
+                <p>Notice here that Norris is still pushing, with no signs of lifting-and-coasting. Take note of turns 11 and 17 and how both drivers' speed are similar.</p>
+
+                <h2 class="section-heading">Lap 25</h2>
+                <img class="img-fluid" src="/static/assets/img/vegas25_lap25.png" alt="..." />
+                <span class="caption text-muted">Figure 3. Comparison of Norris vs Verstappen's telemetry on lap 25.</span>
+                <p>Lap 25 is the first obvious instance of Norris LICO-ing, namely in turns 11 and 17, circled in black. Note that Verstappen's sudden drop in speed at turn 17 is because he pitted at the end of this lap and therefore had to decrease his speed to maintain the pit lane speed limit.</p>
+
+                <h2 class="section-heading">Lap 40</h2>
+                <img class="img-fluid" src="/static/assets/img/vegas25_lap40.png" alt="..." />
+                <span class="caption text-muted">Figure 4. Comparison of Norris vs Verstappen's telemetry on lap 40.</span>
+                <p>On this lap we see Norris performing more aggressive lifting into turn 11, as shown by the steeper drop in speed than on lap 25. His lifting on turn 17 is around the same amount as on lap 25.</p>
+
+                <h2 class="section-heading">Lap 46</h2>
+                <img class="img-fluid" src="/static/assets/img/vegas25_lap46.png" alt="..." />
+                <span class="caption text-muted">Figure 5. Comparison of Norris vs Verstappen's telemetry on lap 46.</span>
+                <p>This lap displays a natural progression from lap 40, with Norris lifting more on both corners.</p>
+
+                <h2 class="section-heading">Lap 47</h2>
+                <img class="img-fluid" src="/static/assets/img/vegas25_lap47.png" alt="..." />
+                <span class="caption text-muted">Figure 6. Comparison of Norris vs Verstappen's telemetry on lap 47.</span>
+                <p>This is the where the lifting becomes very aggressive. Not only is Norris lifting well ahead of turn 11 by several hundred meters and sharply getting off the throttle into turn 17, he's also starting to lift going into turn 14. We also see first evidence of lifting into turns 10 and 5.</p>
+
+                <h2 class="section-heading">Lap 48</h2>
+                <img class="img-fluid" src="/static/assets/img/vegas25_lap48.png" alt="..." />
+                <span class="caption text-muted">Figure 7. Comparison of Norris vs Verstappen's telemetry on lap 48.</span>
+                <p>Going into turns 5, 10, 11, 14, and 17, Norris is lifting even more aggressively. He starts lifting on the straights going into turns 13 and 14.</p>
+
+                <h2 class="section-heading">Lap 50</h2>
+                <img class="img-fluid" src="/static/assets/img/vegas25_lap50.png" alt="..." />
+                <span class="caption text-muted">Figure 8. Comparison of Norris vs Verstappen's telemetry on lap 50.</span>
+                <p>On the last lap, Norris lifts less going into turns 10, 11, 13, 14, and 17. He also stops lifting on the straight going into turn 14. His lift into turn 5 is about the same. By comparison, his lift into turn 7 is more drastic than his lift on lap 48, lifting right after the apex of turn 6.</p>
 
                 <!-- SECTION 2 -->
-                <h2 class="section-heading">2022 United States GP - Perez, Alonso, Zhou, Ocon</h2>
-                <p>Now, let's switch to the ground effect era cars. The 2022 US GP at the Circuit of the Americas (COTA) saw five drivers undergo engine replacements, with all receiving grid penalties. These drivers were Sergio Perez, Fernando Alonso, Guanyu Zhou, Esteban Ocon, and Charles Leclerc. At COTA, like at Monza, top speed is highly beneficial because of the long straights and high-speed corners.</p>
-                <p>We can compare the top speeds and average speeds of these drivers to their teammates and the field. This is shown in Figures 5 through 10. Charles Leclerc is being excluded here since his teammate Carlos Sainz only completed one lap before DNFing, and it would therefore not be an accurate comparison.</p>
-                <p>A common theme in the data is that when the driver with the fresh engine has a higher top speed than his teammate and the field, it is by a large margin. It's important to observe how the top speeds of Alonso and Ocon coincide almost perfectly (Figure 7).</p>
-                <img class="img-fluid" src="/static/assets/img/14_31_Field_2022_United_States_Grand_Prix_TopSpeed.png" alt="..." />
-                <span class="caption text-muted">Figure 7. A plot comparing the top speed of Fernando Alonso to his teammate Esteban Ocon as well as to the top speed of the rest of the field.</span>
-
-                <!-- SECTION 3 -->
                 <h2 class="section-heading">Takeaways</h2>
-                <p>All this is to say that when it comes to performance, any bit of upgrade helps and a new engine certainly helps. This is critical, especially since McLaren has two drivers in contention for the title. If one of them has a poor qualifying session and ends up in the midfield, then why not replace the car's engine?</p>
-                <p>Like we've seen above, a new engine is not some cheat code; driver skill does still matter. However, with the final few races on the horizon, any boost in power is welcomed by the championship contenders.</p>
+                <p>As we can see from Figure 1 and the corresponding telemetry sheets, the spike in time delta starting at lap 46 is explained by Norris's extreme LICO-ing. On the preceding laps, the speed difference ranges from around 10-20 kph. After lap 46, the range is approximately from 25-60 kph. Although this LICO-ing wasn't enough to mitigate the skid block wear, it's interesting to see how drastic the progression became.</p>
 
             </div>
         </div>
