@@ -16,3 +16,6 @@ def post1(request):
 
 def post2(request):
     return render(request, "myApp/post2.html", {})
+
+def post3(request):
+    return render(request, "myApp/post3.html", {})

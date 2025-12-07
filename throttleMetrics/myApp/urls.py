@@ -26,7 +26,8 @@ urlpatterns = [
     path("about/", views.about, name="about"),
     path("contact/", views.contact, name="contact"),
     path("Power-Unit-Pick-Me-Up/", views.post1, name="post1"),
-    path("Drastic-Situations-Call-For-Drastic-Measures/", views.post2, name="post2")
+    path("Drastic-Situations-Call-For-Drastic-Measures/", views.post2, name="post2"),
+    path("Head-To-Head-During-Abu-Dhabi-Qualifying/", views.post3, name="post3")
 ]
 
 urlpatterns += staticfiles_urlpatterns()
