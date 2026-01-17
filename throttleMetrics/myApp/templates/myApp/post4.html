@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Throttlemetrics</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index' %}" target="_blank">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}" target="_blank">About</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'contact' %}" target="_blank">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({% static 'assets/img/post4-bg.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>A Look Back on the Ground-Effect Era</h1>
+                    <h2 class="subheading">Did It Deliver on Its Promise of Closer Racing?</h2>
+                    <span class="meta">
+                        Posted by
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">Yeeva Tsewang</a>
+                        on January 16, 2026
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- INTRO -->
+                <p>With the 2026 F1 regulations removing the Venturi tunnels from the floor of the cars, it seems that the heavy emphasis on ground effect is making its way out the door. In its place will be flatter floors, larger diffusers, and less complex aero, all with the aim of reducing downforce and dirty, turbulent air. Additionally, the cars will be lighter, shorter, and slimmer: the minimum weight has been reduced by 30 kg to 768 kg, the wheelbase by 200 mm to 3,400 mm, and the overall width by 100 mm to 1,900 mm. These measures are to foster closer racing and the ability for cars to follow each other closer through the corners. Coincidentally, these were also the same main focal points that motivated the 2022 regulations. Now that this "ground-effect era" from 2022-2025 has more or less come to an end, let's see if it delivered on its promise.</p>
+
+                <!-- Analysis -->
+                <h2 class="section-heading">Initial Analysis</h2>
+                <p>We will get the four years prior to 2022 and the 4 years after and including 2022 for this comparison. Our primary datapoint to measure following ability will be the gap to the car ahead. The time to car ahead for every race for each year from 2018 to 2025 inclusive can be extracted. The mean and median of these points are plotted in Figure 1.</p>
+
+                <img class="img-fluid" src="/static/assets/img/mean-med-time-data.png" alt="..." />
+                <span class="caption text-muted">Figure 1. A plot of the mean and median of the time to the car ahead across 2018 to 2025.</span>
+                <p>The graph shows around a 30.5% average decrease in average time delta after the cars shifted to ground effect in 2022. Interestingly, the median stayed roughly the same, with only a 14.6% average decrease. The larger average drop and the smaller median drop implies the presence of dramatic outliers or backmarkers in the pre-2022 years. The ground-effect era helped string the mid-to-lower field together, as shown by the dramatic drop in average delta. However, this effect wasn't as pronounced in the top-to-upper-midfield given the fact that the median didn't change as much. We can further quantify this difference by comparing the points standings of backmarkers to the rest of the field. This shown below, where we classify a backmarker as the 9th and 10th place finishing teams in the end-of-season standings.</p>
+
+                <img class="img-fluid" src="/static/assets/img/9th-10th-points.png" alt="..." />
+                <span class="caption text-muted">Figure 2. A plot of the end-of-season points standings for the 9th and 10th placed teams</span>
+
+                <p>From 2018 to 2020, there is a substantial decline in the points amounts, with a significant 89.6% drop from 2019 to 2020, suggesting a sizable performance disparity among the low teams. There is a small increase in 2021 and a massive 231% increase in 2022. Granted, over the course of the ground-effect era, the numbers fluctuate quite a bit. That being said, the trend is overwhelmingly positive. This gives evidence that the new regulations did indeed increase competition in the mid-to-low field, as teams who previously struggled were able to close the performance gap. A notable example of this is Williams, whose performance is plotted in Figure 3.</p>
+                <img class="img-fluid" src="/static/assets/img/williams-performance.png" alt="..." />
+                <span class="caption text-muted">Figure 3. The end-of-season performance of Williams from 2018 - 2025.</span>
+
+                <!-- Further Analysis -->
+                <h2 class="section-heading">Further Analysis</h2>
+                <p>While looking at mean and median gives us a good starting picture, we shouldn't only use these metrics. This is because they can be inadvertently affected by things like time lost during pitstops. Events like this cause the average time to increase, and we don't want to mistakenly attribute this increase to an inability for close racing. A solution is to group time deltas into buckets: within 1 second, 2, 3, and 5 seconds. By doing this, we can accurately capture the cars' ability to follow.</p>
+
+                <p>Another thing we need to consider is if we want to compare the number of instances of these buckets returning true, or if we want to compare ratios of these instances. The former option is not as robust as the latter since the number of races or even the race distances could change across seasons. This could lead to an increase that we mistakenly attribute to ground effect when in reality it's just because there's more races and a longer race distance. If we really wanted to compare the number of instances, we could just use data from the common races that happened across all eight years. However, this would drastically reduce the number of data points, and we would lose considerable amount of information. Therefore, the best and most robust method is to compare ratios. The figure below displays the ratios of the 4 buckets.</p>
+                <img class="img-fluid" src="/static/assets/img/Within-1-2-3-5-second instances.png" alt="..." />
+                <span class="caption text-muted">Figure 4. The ratio of time gaps less than or equal to the bucket value over all time gaps in the season for every bucket value and season.</span>
+
+                <p>Across all buckets, there's a trend: the percentage of time gaps within the bucket is increasing. All exhibit a modest increase in within-instances from 2021 to 2022 and a relatively stable increase from year-to-year afterwards. Interestingly, if you draw a line of best fit through the ratio of within-instances, they all are of the same slope. This reveals that the new regulations had effects across all time delta buckets and not just in certain ones.</p>
+
+                <!-- Closing Analysis and Takeaways -->
+                <h2 class="section-heading">Closing Analysis and Takeaways</h2>
+                <p>Comparing end-of-season points standings, we can see the ground-effect era's effect as well.</p>
+                <img class="img-fluid" src="/static/assets/img/points-per-position.png" alt="..." />
+                <span class="caption text-muted">Figure 5. The end-of-season points standings over all eight years.</span>
+
+                <p>As this graph shows, the pre-2022 years usually had a steep drop in points between the top three and the upper-midfield. This drop subsided in the ground-effect years, with the midfield closer strung together on points and the upper midfield challenging the top three.</p>
+                <p>While the first part of the 2022 season was plagued with issues such as the dreaded porpoising, the ground-effect era has proven to be effective in promoting closer, harder, and more competitive racing. </p>
+            </div>
+        </div>
+    </div>
+</article>
+<!-- Footer-->
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fas fa-camera fa-stack-1x fa-inverse"></i>
+                                    </span>
+                        </a>
+                    </li>
+                    <!--
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                -->
+                    <div class="small text-center text-muted fst-italic">Copyright &copy; Throttlemetrics 2026</div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

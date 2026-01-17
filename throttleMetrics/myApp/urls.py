@@ -27,7 +27,9 @@ urlpatterns = [
     path("contact/", views.contact, name="contact"),
     path("Power-Unit-Pick-Me-Up/", views.post1, name="post1"),
     path("Drastic-Situations-Call-For-Drastic-Measures/", views.post2, name="post2"),
-    path("Head-To-Head-During-Abu-Dhabi-Qualifying/", views.post3, name="post3")
+    path("Head-To-Head-During-Abu-Dhabi-Qualifying/", views.post3, name="post3"),
+    path("A-Look-Back-On-The-Ground-Effect-Era/", views.post4, name="post4"),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()
