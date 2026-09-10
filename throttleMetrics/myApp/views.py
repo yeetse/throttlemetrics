@@ -25,3 +25,6 @@ def post4(request):
 
 def olderposts(request):
     return render(request, "myApp/olderposts.html", {})
+
+def post5(request):
+    return render(request, "myApp/post5.html", {})
