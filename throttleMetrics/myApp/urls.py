@@ -30,8 +30,7 @@ urlpatterns = [
     path("Head-To-Head-During-Abu-Dhabi-Qualifying/", views.post3, name="post3"),
     path("A-Look-Back-On-The-Ground-Effect-Era/", views.post4, name="post4"),
     path("older-posts/", views.olderposts, name="olderposts"),
-    path("2026-F1-Midseason-Recap/", views.post5, name="post5"),
-
+    path("2026-F1-Midseason-Review/", views.post5, name="post5"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
