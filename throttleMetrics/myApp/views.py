@@ -28,3 +28,6 @@ def olderposts(request):
 
 def post5(request):
     return render(request, "myApp/post5.html", {})
+
+def post6(request):
+    return render(request, "myApp/post6.html", {})
