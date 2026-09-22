@@ -32,6 +32,7 @@ urlpatterns = [
     path("older-posts/", views.olderposts, name="olderposts"),
     path("2026-F1-Midseason-Review/", views.post5, name="post5"),
     path("Antonelli-vs-Norris-Madrid/", views.post6, name="post6"),
+    path("LMGTEpro-vs-LMGTEam/", views.post7, name="post7"),
 
 ]
 

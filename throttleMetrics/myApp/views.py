@@ -31,3 +31,6 @@ def post5(request):
 
 def post6(request):
     return render(request, "myApp/post6.html", {})
+
+def post7(request):
+    return render(request, "myApp/post7.html", {})

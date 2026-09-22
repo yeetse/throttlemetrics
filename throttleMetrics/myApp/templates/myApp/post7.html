@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Throttlemetrics</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+    <!-- MathJax for math-style equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index' %}" target="_blank">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}" target="_blank">About</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'contact' %}" target="_blank">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({% static 'assets/img/post7-bg.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>LMGTE Pro vs LMGTE Am</h1>
+                    <h2 class="subheading">What's the Effect of Having More Experienced Drivers?</h2>
+                    <span class="meta">
+                        Posted by
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">Yeeva Tsewang</a>
+                        on September 22, 2026
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- INTRO -->
+                <p>
+                    Multi-class racing series such as the FIA World Endurance Championship (WEC) and the International Motor Sports Association (IMSA) SportsCar Championship bring with them a unique racing dynamic where cars of different
+                    classes and drivers of different skill level compete at the same place and same time. This leads to fields upwards of 60 cars battling for class wins (or overall win in the case of the top class), all while navigating traffic from other car classes. 
+                </p>
+
+                <p>
+                    Grand Touring (GT) cars are one such class, and they are often split by driver experience level, namely Pro and Am. As the names suggest, the difference between the two categories lies in the skill composition of a team's driver lineup. The FIA 
+                    does this with a grading system, classifying drivers as bronze, silver, gold, or platinum.
+                </p>
+                <p>
+                    The data I used is from the 2022 24 Hours of Le Mans, which ran the LM Grand Touring Endurance (LMGTE) regulation set for grand tourers. LMGTE Am teams were required to have at least one bronze-rated driver, as well as one rated no higher than silver. 
+                    This meant that only one driver could be rated gold or higher in the team's line-up. LMGTE Pro teams, however, had no restrictions.
+                </p>
+                <p>
+                    This created an interesting question: for Pro and Am teams using the same cars and controlling for confounding variables, what was the lap time impact of having more experienced drivers? In other words, how much of the performance difference between Pro and Am
+                    teams was due to the driver experience gap? Through a regression impact analysis, I attempted to quantify this.
+                </p>
+
+                <h2 class="section-heading">Gathering and Prepping Data</h2>
+                <p>
+                    The data for this analysis was obtained from <a href="https://www.kaggle.com/datasets/tristenterracciano/fia-wec-lap-data-20122022" target="_blank">Kaggle</a>. This contained sector and lap time data from WEC between 2012 and 2022 across different teams and classes.
+                    To make the analysis easier, I limited the scope to be the 2022 24 Hours of Le Mans. Among the Pro teams, the cars used were the Chevrolet Corvette C8.R, Porsche 911 RSR-19, and Ferrari 488 GTE Evo. The Porsche and Ferrari were also used by the Am teams, along 
+                    with the Aston Martin Vantage GTE. To simplify analysis, I chose to select only one vehicle model. Between the Porsche and Ferrari, I selected the Porsche because, after looking at the Balance of Performance (BoP) LMGTE table for Le Mans 2022, the Porsche had 
+                    smaller differences between the Pro and Am specced car. Here's a preview of the transformed dataset:
+                </p>
+
+                <div style="display: flex; justify-content: center; margin: 2rem 0 1rem 0;">
+                    <div style="width: 100%; max-width: 980px; overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.74rem; text-align: left; min-width: 1700px; background-color: #fafafa;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">lap_number</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">team</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">number</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">team_no</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">class</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">vehicle</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">driver_number</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">driver_name</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">lap_time</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">lap_time_s</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">s1</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">s2</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">s3</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">kph</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">top_speed</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">driver_stint_no</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">position</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">class_position</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">class_interval</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">skill_Pro</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">circuit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">1</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Dempsey - Proton Racing</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">77</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Dempsey - Proton Racing #77</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">LMGTE Am</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Porsche 911 RSR-19</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">3</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Harry TINCKNELL</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0 days 00:04:36.527000</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">276.527</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">77.791</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">90.079</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">108.657</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">175.5</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">286.2</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">35.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0.288</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">False</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">LE MANS</td>
+                                </tr>
+                                <tr style="background-color: #f8f8f8;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">1</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">GR Racing</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">86</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">GR Racing #86</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">LMGTE Am</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Porsche 911 RSR-19</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">3</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Benjamin BARKER</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0 days 00:04:37.902000</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">277.902</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">79.07</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">90.365</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">108.467</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">174.6</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">277.4</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">38.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">4.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0.446</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">False</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">LE MANS</td>
+                                </tr>
+                                <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">1</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Team Project 1</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">46</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Team Project 1 #46</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">LMGTE Am</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Porsche 911 RSR-19</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">1</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Matteo CAIROLI</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0 days 00:04:40.956000</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">280.956</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">79.647</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">90.739</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">110.57</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">172.7</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">251.6</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">43.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">8.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0.475</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">False</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">LE MANS</td>
+                                </tr>
+                                <tr style="background-color: #f8f8f8;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">1</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Hardpoint Motorsport</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">99</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Hardpoint Motorsport #99</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">LMGTE Am</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Porsche 911 RSR-19</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Alessio PICARIELLO</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0 days 00:04:41.387000</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">281.387</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">80.293</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">90.459</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">110.635</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">172.5</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">274.6</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">44.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">9.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0.431</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">False</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">LE MANS</td>
+                                </tr>
+                                <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem;">1</td>
+                                    <td style="padding: 0.5rem 0.6rem;">Team Project 1</td>
+                                    <td style="padding: 0.5rem 0.6rem;">56</td>
+                                    <td style="padding: 0.5rem 0.6rem;">Team Project 1 #56</td>
+                                    <td style="padding: 0.5rem 0.6rem;">LMGTE Am</td>
+                                    <td style="padding: 0.5rem 0.6rem;">Porsche 911 RSR-19</td>
+                                    <td style="padding: 0.5rem 0.6rem;">3</td>
+                                    <td style="padding: 0.5rem 0.6rem;">Ben BARNICOAT</td>
+                                    <td style="padding: 0.5rem 0.6rem;">0 days 00:04:41.805000</td>
+                                    <td style="padding: 0.5rem 0.6rem;">281.805</td>
+                                    <td style="padding: 0.5rem 0.6rem;">79.318</td>
+                                    <td style="padding: 0.5rem 0.6rem;">91.29</td>
+                                    <td style="padding: 0.5rem 0.6rem;">111.197</td>
+                                    <td style="padding: 0.5rem 0.6rem;">172.2</td>
+                                    <td style="padding: 0.5rem 0.6rem;">267.8</td>
+                                    <td style="padding: 0.5rem 0.6rem;">0</td>
+                                    <td style="padding: 0.5rem 0.6rem;">45.0</td>
+                                    <td style="padding: 0.5rem 0.6rem;">10.0</td>
+                                    <td style="padding: 0.5rem 0.6rem;">0.418</td>
+                                    <td style="padding: 0.5rem 0.6rem;">False</td>
+                                    <td style="padding: 0.5rem 0.6rem;">LE MANS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p>
+                    Now that the race is selected and year-, circuit-, and vehicle-specific differences have been taken into account, the regression modeling can start.
+                </p>
+            
+                <h2 class="section-heading">Regression Modeling</h2>
+                <p>
+                    For this multiple linear regression, I used three models: Ordinary Least Squares (OLS), Lasso, and Elastic Net. The equation I used is below. The predictor we are concerned about is 
+                    \[\text{skill_Pro}\]
+                    
+                    To isolate the effects of driver lineup experience, I have added additional covariates to account for confounding variables.
+                    
+                </p>
+                <div style="display: flex; justify-content: center; align-items: center; margin: 1.5rem 0;">
+                    <div style="width: 100%; max-width: 780px; text-align: center; overflow-x: auto; padding: 0.25rem 0;">
+                        \[
+                        \text{lap_time_s} \sim \text{skill_Pro} + \text{team_no} + \text{lap_number} + \text{driver_stint_no} + C(\text{driver_number})
+                        \]
+                    </div>
+                </div>
+
+
+                <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+                    <table style="width: 100%; max-width: 760px; border-collapse: collapse; font-size: 0.92rem; text-align: left; background-color: #fafafa;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Variable</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Meaning</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Interpretation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">skill_Pro</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Dummy variable for driver ranking</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Lap-time difference associated with a more experienced driver lineup</td>
+                            </tr>
+                            <tr style="background-color: #f8f8f8;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">team_no</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">A combination of the team name and number</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Controls for persistent team-level performance differences</td>
+                            </tr>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">lap_number</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">The lap number of the race the lap was completed at</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Captures lap-to-lap changes from traffic, tire wear, and strategy effects</td>
+                            </tr>
+                            <tr style="background-color: #f8f8f8;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">driver_stint_no</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">What stint the driver was on</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Controls for stint-specific conditions and driver rotation effects</td>
+                            </tr>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem;">C(driver_number)</td>
+                                <td style="padding: 0.6rem 0.8rem;">The driver number that completed the lap (e.g. the team's 1st, 2nd, 3rd driver)</td>
+                                <td style="padding: 0.6rem 0.8rem;">Accounts for driver ordering in a team's lineup</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h2 class="section-heading">Results</h2>
+                <p>
+                    After fitting, the results were as follows:
+                </p>
+                <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+                    <table style="width: 100%; max-width: 640px; border-collapse: collapse; font-size: 0.92rem; text-align: left; background-color: #fafafa;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Model</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Estimate</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Confidence Interval (95%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">OLS</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">-7.869</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">[-13.388, -2.350]</td>
+                            </tr>
+                            <tr style="background-color: #f8f8f8;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Lasso</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">-7.869</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">[-13.389, -2.349]</td>
+                            </tr>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem;">Elastic Net</td>
+                                <td style="padding: 0.6rem 0.8rem;">-7.869</td>
+                                <td style="padding: 0.6rem 0.8rem;">[-13.389, -2.349]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    Across OLS, Lasso, and Elastic Net, the estimate for skill_Pro remains negative and statistically meaningful. After accounting for team-, lap-number-, stint-, and lineup-specific effects, it's shown that the Pro teams are
+                    a best estimate of 7.87 seconds faster than the Am teams. The 95% confidence interval spans from 2.35 to 13.39 seconds faster, meaning that we are 95% confident that the true average lap time saved with a Pro 
+                    driver lineup is between 2.35 and 13.39 seconds. Thus, the lowest plausible average time saved is 2.35 seconds, and the highest plausible average time saved is 13.39 seconds.
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+ 
+
+<!-- Footer-->
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fas fa-camera fa-stack-1x fa-inverse"></i>
+                                    </span>
+                        </a>
+                    </li>
+                    <!--
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                -->
+                    <div class="small text-center text-muted fst-italic">Copyright &copy; Throttlemetrics 2026</div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
