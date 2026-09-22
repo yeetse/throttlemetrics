@@ -84,7 +84,7 @@
                 </p>
                 <p>
                     The data I used is from the 2022 24 Hours of Le Mans, which ran the LM Grand Touring Endurance (LMGTE) regulation set for grand tourers. LMGTE Am teams were required to have at least one bronze-rated driver, as well as one rated no higher than silver. 
-                    This meant that only one driver could be rated gold or higher in the team's line-up. LMGTE Pro teams, however, had no restrictions.
+                    This meant that only one driver could be rated gold or higher in the team's lineup. LMGTE Pro teams, however, had no restrictions.
                 </p>
                 <p>
                     This created an interesting question: for Pro and Am teams using the same cars and controlling for confounding variables, what was the lap time impact of having more experienced drivers? In other words, how much of the performance difference between Pro and Am
@@ -254,7 +254,7 @@
             
                 <h2 class="section-heading">Regression Modeling</h2>
                 <p>
-                    For this multiple linear regression, I used three models: Ordinary Least Squares (OLS), Lasso, and Elastic Net. The equation I used is below. The predictor we are concerned about is 
+                    For this multiple linear regression, I used three models: Ordinary Least Squares (OLS), Lasso, and Elastic Net. The R-style equation I used is below. The predictor we are concerned about is 
                     \[\text{skill_Pro}\]
                     
                     To isolate the effects of driver lineup experience, I have added additional covariates to account for confounding variables.
@@ -281,7 +281,7 @@
                         <tbody>
                             <tr style="background-color: #ffffff;">
                                 <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">skill_Pro</td>
-                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Dummy variable for driver ranking</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Dummy variable for team experience ranking</td>
                                 <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Lap-time difference associated with a more experienced driver lineup</td>
                             </tr>
                             <tr style="background-color: #f8f8f8;">
@@ -342,7 +342,7 @@
                 <p>
                     Across OLS, Lasso, and Elastic Net, the estimate for skill_Pro remains negative and statistically meaningful. After accounting for team-, lap-number-, stint-, and lineup-specific effects, it's shown that the Pro teams are
                     a best estimate of 7.87 seconds faster than the Am teams. The 95% confidence interval spans from 2.35 to 13.39 seconds faster, meaning that we are 95% confident that the true average lap time saved with a Pro 
-                    driver lineup is between 2.35 and 13.39 seconds. Thus, the lowest plausible average time saved is 2.35 seconds, and the highest plausible average time saved is 13.39 seconds.
+                    driver lineup is between 2.35 and 13.39 seconds. 
                 </p>
             </div>
         </div>
