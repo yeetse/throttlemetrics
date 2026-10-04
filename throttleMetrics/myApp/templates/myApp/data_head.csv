@@ -1,0 +1,6 @@
+,Driver,fullName,DriverNumber,LapTime,LapTimeS,LapNumber,Stint,Team,Compound,TyreLife,FreshTyre,yearsInF1,racedBefore
+0,VER,Max Verstappen,3,0 days 00:01:36.477000,96.477,2.0,1.0,Red Bull Racing,SOFT,2.0,True,10,True
+1,VER,Max Verstappen,3,0 days 00:01:35.696000,95.696,5.0,2.0,Red Bull Racing,SOFT,2.0,True,10,True
+2,VER,Max Verstappen,3,0 days 00:01:35.250000,95.25,8.0,3.0,Red Bull Racing,SOFT,2.0,True,10,True
+3,VER,Max Verstappen,3,0 days 00:01:35.130000,95.13,11.0,4.0,Red Bull Racing,SOFT,2.0,True,10,True
+4,HAM,Lewis Hamilton,44,0 days 00:01:36.595000,96.595,2.0,1.0,Ferrari,MEDIUM,2.0,True,20,True

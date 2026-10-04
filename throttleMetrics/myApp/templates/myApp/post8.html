@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Throttlemetrics</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+    <!-- MathJax for math-style equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index' %}" target="_blank">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}" target="_blank">About</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'contact' %}" target="_blank">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({% static 'assets/img/post8-bg.jpg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>How Much Does Track Experience Matter?</h1>
+                    <h2 class="subheading">Bahrain Grand Prix in Malaysia Quali Performance Analysis</h2>
+                    <span class="meta">
+                        Posted by
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">Yeeva Tsewang</a>
+                        on October 3, 2026
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- INTRO -->
+                <p>
+                    The Sepang International Circuit returns to the F1 calendar for the first time since 2017 to host the Bahrain Grand Prix, which was cancelled (along with the Saudi Arabian Grand Prix) earlier in the season. Across the years that Sepang 
+                    hosted the Malaysian Grand Prix, it produced extremely competitive, tight, and close racing. It's also been the source of some of F1's most iconic moments and battles, such as the tension-flaring Multi-21 incident between Sebastian Vettel and Mark 
+                    Webber in 2013. Because of the circuit's F1 pedigree, when its return was announced, it was met with widespread excitement by both the F1 community and drivers.  
+
+                </p>
+           
+                <p>
+                    Of the current 22 driver grid, 10 of them have previously raced there. For the other 12, it'll be their first time racing at the circuit. I found that this dynamic created an interesting situation since those other 12 drivers have had no race experience at the circuit and have needed to rely on simulator and free practice runs to get to grips with the track. Because of this, would
+                    those 10 drivers who do have race experience have an advantage? And if so, how much? In a similar approach to my <a href="{% url 'post7' %}" target="_blank">previous impact analysis post</a>, I'll attempt to quantify the average lap time gained in Qualifying associated with previous Sepang race experience.
+                </p>
+
+                <h2 class="section-heading">Gathering and Prepping Data</h2>
+                <p>
+                     The data for this analysis was obtained from the <a href="https://theoehrly-fast-f1.mintlify.app/" target="_blank">FastF1 and Ergast API</a>. FastF1 was used to get the session's lap times. An important note is that in-laps, out-laps, cooldown laps, and outlier laps were filtered out because these are not reflective of a driver-and-car's true performance. For instance, pole-sitter Max Verstappen had many such slow laps, like on lap 3, 6, and 12 (which were likely cooldown laps). If these laps weren't filtered 
+                     out, they would confuse the model since they're not reflective of his true qualifying pace.
+                </p>
+
+                <p>
+                    Ergast was used to extract a crucial historical variable for each driver: racedBefore.
+                    This is a dummy variable and is the predictor we're concerned about. An important note is that I only counted drivers with a Malaysian Grand Prix race start as True, so although Charles Leclerc did an FP1 session at Sepang in 2017, he is marked as False. 
+                </p>
+
+                <p>
+                    Here's a preview of the transformed dataset:
+                </p>
+
+                <div style="display: flex; justify-content: center; margin: 2rem 0 1rem 0;">
+                    <div style="width: 100%; max-width: 980px; overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.74rem; text-align: left; min-width: 1700px; background-color: #fafafa;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Driver</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">fullName</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">DriverNumber</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">LapTime</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">LapTimeS</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">LapNumber</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Stint</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Team</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Compound</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">TyreLife</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">FreshTyre</th>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">racedBefore</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">VER</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Max Verstappen</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">3</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0 days 00:01:36.477000</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">96.477</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">1.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Red Bull Racing</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">SOFT</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                </tr>
+                                <tr style="background-color: #f8f8f8;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">VER</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Max Verstappen</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">3</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0 days 00:01:35.696000</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">95.696</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">5.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Red Bull Racing</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">SOFT</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                </tr>
+                                <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">VER</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Max Verstappen</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">3</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0 days 00:01:35.250000</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">95.25</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">8.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">3.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Red Bull Racing</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">SOFT</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                </tr>
+                                <tr style="background-color: #f8f8f8;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">VER</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Max Verstappen</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">3</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0 days 00:01:35.130000</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">95.13</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">11.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">4.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Red Bull Racing</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">SOFT</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                </tr>
+                                    <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">HAM</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Lewis Hamilton</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">44</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">0 days 00:01:36.595000</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">96.595</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">1.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">Ferrari</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">MEDIUM</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2.0</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">True</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p>
+                    Now that the data is obtained and transformed, the regression modeling can start.
+                </p>
+            
+                <h2 class="section-heading">Regression Modeling</h2>
+                <p>
+                    As with my previous impact analysis, I used three models for this multiple linear regression: Ordinary Least Squares (OLS), Lasso, and Elastic Net. The R-style equation I used is below. The predictor we are concerned about is 
+                    \[\text{racedBefore}\]
+                    
+                    To isolate the effects of on-track race experience, I have added additional covariates to account for confounding variables.
+                    
+                </p>
+                <div style="display: flex; justify-content: center; align-items: center; margin: 1.5rem 0;">
+                    <div style="width: 100%; max-width: 780px; text-align: center; overflow-x: auto; padding: 0.25rem 0;">
+                        \[
+                        \text{LapTimeS} \sim  \text{racedBefore} + \text{C(Team)} + \text{Stint} + \text{TyreLife}
+                        \]
+                    </div>
+                </div>
+
+
+                <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+                    <table style="width: 100%; max-width: 760px; border-collapse: collapse; font-size: 0.92rem; text-align: left; background-color: #fafafa;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Variable</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Meaning</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Interpretation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">racedBefore</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Dummy variable for Sepang race experience</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Lap-time difference associated with race experience at Sepang</td>
+                            </tr>
+                            <tr style="background-color: #f8f8f8;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">C(Team)</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">The team that the driver races for</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Controls for persistent team-level performance differences</td>
+                            </tr>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Stint</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">What stint the driver was on</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Controls for stint-specific conditions</td>
+                            </tr>                    
+                            <tr style="background-color: #f8f8f8;">
+                                <td style="padding: 0.6rem 0.8rem;">TyreLife</td>
+                                <td style="padding: 0.6rem 0.8rem;">The condition of the driver's tires for a given lap</td>
+                                <td style="padding: 0.6rem 0.8rem;">Controls for tire wear effects</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h2 class="section-heading">Results</h2>
+                <p>
+                    After fitting, the results were as follows:
+                </p>
+                <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+                    <table style="width: 100%; max-width: 640px; border-collapse: collapse; font-size: 0.92rem; text-align: left; background-color: #fafafa;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Model</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Estimate</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Confidence Interval (95%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">OLS</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">-0.272</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">[-0.504, -0.040]</td>
+                            </tr>
+                            <tr style="background-color: #f8f8f8;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Lasso</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">-0.272</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">[-0.504, -0.040]</td>
+                            </tr>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem;">Elastic Net</td>
+                                <td style="padding: 0.6rem 0.8rem;">-0.272</td>
+                                <td style="padding: 0.6rem 0.8rem;">[-0.504, -0.040]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    For OLS, I achieved a best estimate for racedBefore of -0.272, and this was statistically significant, with a p-value of 0.022 (less than 0.05). This estimate and accompanying confidence interval remained 
+                    consistent for Lasso and Elastic Net. Therefore, I estimate that prior Sepang experience is associated with an average lap-time improvement of 0.272 seconds, with a 95% confidence interval of 0.04 to 0.504 seconds, 
+                    controlling for team, stint, and tyre life.
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+ 
+
+<!-- Footer-->
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fas fa-camera fa-stack-1x fa-inverse"></i>
+                                    </span>
+                        </a>
+                    </li>
+                    <!--
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                -->
+                    <div class="small text-center text-muted fst-italic">Copyright &copy; Throttlemetrics 2026</div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
