@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Throttlemetrics</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+
+    <!-- MathJax for math-style equations -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'index' %}" target="_blank">Home</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}" target="_blank">About</a></li>
+                <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'contact' %}" target="_blank">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Page Header-->
+<header class="masthead" style="background-image: url({% static 'assets/img/post9-bg.jpeg' %})">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>What's the Predictive Power of Track Position?</h1>
+                    <h2 class="subheading">A Case Study of the 2026 Indy 500</h2>
+                    <span class="meta">
+                        Posted by
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">Yeeva Tsewang</a>
+                        on October 18, 2026
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- INTRO -->
+                <p>
+                    The Indianapolis 500 is the crown jewel of IndyCar, hallowed ground for North American auto racing, and an icon on the global motorsports stage. Every year, 33 drivers 
+                    take on the 2.5 mile long circuit in a grueling 200 lap showdown, reaching racing speeds upwards of 220 mph and quali speeds upwards of 230 mph. The greatest names in 
+                    motorsport — A.J. Foyt, Jim Clark, Graham Hill, Mario Andretti, Al Unser, Rick Mears — have all taken victory at The Brickyard. Winning the 500 means having your name immortalized. 
+                </p>
+
+                <p>
+                    This year, it was Felix Rosenqvist who got to put his name in the history book. The 110th Running of the Indianapolis 500 saw the closest finish in the 500's history. A mere 0.0233 seconds separated Rosenqvist and David Malukas. There was also 
+                    a record-breaking 70 lead changes, with Alex Palou and Scott Dixon alone trading the lead 26 times. This year's race also had 14 different lap leaders, with only the 2017 and 2018 
+                    runnings (15) and 2024 running (16) having more. 
+                </p>
+
+                <p>
+                    Because of this unique dynamic that superspeedway and oval racing have, where the field's order gets shuffled frequently and trades for the lead occur lap-by-lap, I was curious to find out if there were certain race phases where track position mattered 
+                    more in predicting the grid's finishing order. This post is an exploratory research case study of the 2026 Indy 500 with the goal of investigating and obtaining insights to this question.  
+                </p>
+
+                <h2 class="section-heading">Methodology</h2>
+                <p>
+                    I selected this year's running of the 500 for this case study because of just how close the fight for the win was. To get an idea, let's look at one measure of closeness of racing: lead changes. Below is a plot of the number of lead changes at the 500 across the DW12 chassis era. 
+                </p>
+            </div>
+        </div>
+    </div>  
+</article>
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div style="height:100%; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+            <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.0.0.min.js" integrity="sha256-FEYfO0yRyLtZCpnW0Dw/0DHKQO7Afrq3ml4+rBB818o=" crossorigin="anonymous"></script>                <div id="0035de5e-21e6-4757-9af4-4e06d5b607ee" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("0035de5e-21e6-4757-9af4-4e06d5b607ee")) {                    Plotly.newPlot(                        "0035de5e-21e6-4757-9af4-4e06d5b607ee",                        [{"hovertemplate":"Year=%{x}\u003cbr\u003eLead Changes=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"","orientation":"v","showlegend":false,"x":{"dtype":"i2","bdata":"3AfdB94H3wfgB+EH4gfjB+QH5QfmB+cH6AfpB+oH"},"xaxis":"x","y":{"dtype":"i1","bdata":"IkQiJTYjHh0VIyY0MBZG"},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Year"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Lead Changes"}},"legend":{"tracegroupgap":0},"title":{"text":"Indy 500 Lead Changes (DW12 Chassis)"}},                        {"responsive": true}                    )                };            </script>        </div>
+    </div>
+</div>
+
+
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>
+                    The record number of this year's race made me especially curious. Could track position potentially be less meaningful compared to, say, the 2020 race, which saw the least number of lead changes?
+                </p>
+                <p>
+                    To divide the race into phases, I used the median number of pit stops (which was five) as an indicator. I then divided the total number of laps (excluding the last 10, leaving a 10-lap prediction window, so that the model would need to predict the eventual outcome rather than simply reproduce the nearly completed running order) by this number
+                    equally into five 38 lap phases.
+                </p>
+                <p>
+                    I then trained a model for each of these race phases and compared their performance. For the model, I chose a decision tree regressor because of its ability to handle nonlinear data and its interpretable, deterministic behavior. Although finishing positions are ordinal categories, I treated them as discrete numerical values to quantify prediction errors in terms of positions gained or lost. This approach allowed me to use mean absolute error (MAE) as a performance metric. For instance, a MAE of five means that predictions differ from actual finishing positions by an average of five places. 
+                    This choice prioritizes the magnitude of prediction errors over exact classification accuracy. For example, a classification model with a prediction of fourth place and a true value of sixth place would label the prediction as incorrect. On the other hand, a regression model with a prediction of fourth place and a true value of sixth place would have an absolute error of two. While this numerical approach makes the interpretation of model performance more practical, it assumes that differences between finishing positions can be treated as numerically comparable, which may not 
+                    fully capture the ordinal nature of race results. For this exploratory study, this model limitation is a trade-off I'm willing to make.
+                </p>
+                <h2 class="section-heading">Data Processing</h2>
+                <p>
+                     The data for this study was obtained from the <a href="https://pypi.org/project/raceindycar/" target="_blank">raceindycar package</a>. Lap-level position data was gathered from the race for each driver up through lap 190. For each 38 lap race phase, the data was time-series split to obtain the training and testing sets (70% and 30%, respectively). This was done by setting the training dataset to be the first 27 laps (the ceiling of 70% of 38) of that phase and the testing dataset to be the remaining 11. This was done 
+                     instead of a random split to prevent data leakage. 
+                </p>
+
+                <p>
+                     The X data contained one feature: the driver's position at that lap. The y data contained the response variable: the driver's finishing position. 
+                     Here's a preview of X_train (laps 1 to 27) for race phase 1 (laps 1 to 38):
+                </p>
+
+                <div style="display: flex; justify-content: center; margin: 2rem 0 1rem 0;">
+                    <div style="width: 35%; overflow-x: auto;">
+                        <table style="width: 35%; border-collapse: collapse; font-size: 0.74rem; text-align: left; background-color: #fafafa;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Position</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">19</td>                            
+                                </tr>
+                                <tr style="background-color: #f8f8f8;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">23</td>                                
+                                </tr>
+                                <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">15</td>
+                                </tr>
+                                <tr style="background-color: #f8f8f8;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">2</td>
+                                </tr>
+                                    <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">18</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p>
+                    And here's a preview of y_train for race phase 1:
+                </p>
+
+                <div style="display: flex; justify-content: center; margin: 2rem 0 1rem 0;">
+                    <div style="width: 35%; overflow-x: auto;">
+                        <table style="width: 35%; border-collapse: collapse; font-size: 0.74rem; text-align: left; background-color: #fafafa;">
+                            <thead>
+                                <tr>
+                                    <th style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">PositionFinish</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">29</td>                            
+                                </tr>
+                                <tr style="background-color: #f8f8f8;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">24</td>                                
+                                </tr>
+                                <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">13</td>
+                                </tr>
+                                <tr style="background-color: #f8f8f8;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">7</td>
+                                </tr>
+                                    <tr style="background-color: #ffffff;">
+                                    <td style="padding: 0.5rem 0.6rem; border-bottom: 1px solid #eeeeee;">17</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <p>
+                    Now that the data is extracted, split, and features are obtained, the regression modeling can start.
+                </p>
+            
+                <h2 class="section-heading">Regression Modeling</h2>
+                <p>
+                    As explained in the Methodology section of this post, I used a decision tree regressor. I also did some simple hyperparameter tuning as displayed below and the reason for doing so.
+                </p>
+                <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+                    <table style="width: 100%; max-width: 640px; border-collapse: collapse; font-size: 0.92rem; text-align: left; background-color: #fafafa;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Hyperparameter</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Value</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">min_samples_leaf</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">4</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">There may be extreme outliers in the dataset, so I increased the min_samples_leaf from the default of 1 to limit this noise.</td>
+                            </tr>
+                            <tr style="background-color: #f8f8f8;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">max_depth</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">6</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">Decision trees tend to overfit, so I limited the max_depth in an effort to combat this.</td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+
+                
+                <h2 class="section-heading">Results</h2>
+                <p>
+                    After fitting, the results were as follows. I also decided to add root mean squared error (RMSE) to find which model tended to make larger errors. RMSE is simply the square root of mean squared error (MSE). MSE penalizes large errors since the error values are squared. 
+                    However, the large values can be difficult to interpret. To remedy this, we can square them to scale them back to the original units to make them easier to reason about.  
+                </p>
+                <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+                    <table style="width: 100%; max-width: 640px; border-collapse: collapse; font-size: 0.92rem; text-align: left; background-color: #fafafa;">
+                        <thead>
+                            <tr>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">Race Phase</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">MAE</th>
+                                <th style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #d9d9d9; background-color: #f4f4f4;">RMSE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">1</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">7.0</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">9.1</td>
+                            </tr>
+                            <tr style="background-color: #f8f8f8;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">2</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">5.3</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">7.0</td>
+                            </tr>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem;">3</td>
+                                <td style="padding: 0.6rem 0.8rem;">6.3</td>
+                                <td style="padding: 0.6rem 0.8rem;">8.3</td>
+                            </tr>
+                            <tr style="background-color: #f8f8f8;">
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">4</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">6.2</td>
+                                <td style="padding: 0.6rem 0.8rem; border-bottom: 1px solid #eeeeee;">7.5</td>
+                            </tr>
+                            <tr style="background-color: #ffffff;">
+                                <td style="padding: 0.6rem 0.8rem;">5</td>
+                                <td style="padding: 0.6rem 0.8rem;">3.7</td>
+                                <td style="padding: 0.6rem 0.8rem;">5.1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                    To visualize this better, I've plotted the results below.
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div style="height:100%; width:100%;">                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+            <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.0.0.min.js" integrity="sha256-FEYfO0yRyLtZCpnW0Dw/0DHKQO7Afrq3ml4+rBB818o=" crossorigin="anonymous"></script>                <div id="24fd8652-8163-4bd1-952b-1d5fab98ad91" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("24fd8652-8163-4bd1-952b-1d5fab98ad91")) {                    Plotly.newPlot(                        "24fd8652-8163-4bd1-952b-1d5fab98ad91",                        [{"hovertemplate":"Error Type=MAE\u003cbr\u003eRace Phase Model=%{x}\u003cbr\u003eError Value=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"MAE","line":{"color":"#636efa","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"MAE","orientation":"v","showlegend":true,"x":{"dtype":"i1","bdata":"AQIDBAU="},"xaxis":"x","y":{"dtype":"f8","bdata":"AAAAAAAAHEAzMzMzMzMVQDMzMzMzMxlAzczMzMzMGECamZmZmZkNQA=="},"yaxis":"y","type":"scatter"},{"hovertemplate":"Error Type=RMSE\u003cbr\u003eRace Phase Model=%{x}\u003cbr\u003eError Value=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"RMSE","line":{"color":"#EF553B","dash":"solid"},"marker":{"symbol":"circle"},"mode":"lines","name":"RMSE","orientation":"v","showlegend":true,"x":{"dtype":"i1","bdata":"AQIDBAU="},"xaxis":"x","y":{"dtype":"f8","bdata":"MzMzMzMzIkAAAAAAAAAcQJqZmZmZmSBAAAAAAAAAHkBmZmZmZmYUQA=="},"yaxis":"y","type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Race Phase Model"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Error Value"}},"legend":{"title":{"text":"Error Type"},"tracegroupgap":0},"title":{"text":"Race-Phase-Level Model Performance"}},                        {"responsive": true}                    )                };            </script>        </div>
+    </div>
+</div>
+
+
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>
+                    The results highlight that track positions in the very early race phase (i.e. phase 1) possess the least predictive power. The MAE, RMSE, and difference in magnitude between MAE and RMSE is the largest in this phase. The model makes the highest average error and is very prone to making extremely wrong predictions. This highlights that the model has the least power in predicting the finishing order and has errors of the largest magnitude. 
+                    Intuitively, this makes sense since in this phase of the race, drivers are jockeying for early position gains, especially since the field is bunched up. 
+                </p>
+                <p>
+                    The errors drop as we cover phase 2, 40% racing distance. Interestingly, though, the errors increase in phases 3 and 4. This could possibly be an artifact unique to this year's Indy 500, which, as previously mentioned, had an unprecedented number of lead changes and an impressive number of lap leaders. As we shift from phase 3 into 4, while the 
+                    MAE only drops by 1.6%, the RMSE drops by 9.6%. This shows that between the mid-stage and the start of the late-stage of the race, the number of large errors decreased, meaning that the model had fewer cases of hugely inaccurate predictions. 
+                </p>
+                <p>
+                    As we enter the race's final stage, phase 5, which covers laps 153 through 190, the MAE drops by 40.3% and the RMSE by 32%. This improvement highlights the strong predictive power that late-stage track position holds. Because we held out the last 10 laps rather than, say, only the last lap, the model couldn't have just predicted the finishing order by memorizing the penultimate lap's ordering. Therefore, the percentage drops are likely 
+                    to be a product of the final race phase's predictive power rather than the model memorizing position order. However, a future, more in-depth, study can further examine the drop's significance.
+                </p>
+                <h2 class="section-heading">Future Work</h2>
+                <p>
+                    As mentioned, this was just an exploratory study of the role that track position at different race phases plays in predicting finishing order at a closely-fought Indianapolis 500. It's important to note that this study contained assumptions, namely that race phases can be indicated by pit stops and that error magnitudes can be treated as numerically equal. Moreover, because of its nature as a case study, the results obtained here should not be 
+                    generalized to the entire population of Indy 500 or oval races and should certainly not be generalized to races which are not ovals. 
+                </p>
+                <p>
+                    The patterns explored here can be built upon in future work that further investigates the importance of track position at closely contested oval races, extended across multiple IndyCar races and seasons to establish whether the observed patterns hold more broadly.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</article>
+ 
+
+<!-- Footer-->
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="https://yrtphotography.vercel.app/" target="_blank">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fas fa-circle fa-stack-2x"></i>
+                                        <i class="fas fa-camera fa-stack-1x fa-inverse"></i>
+                                    </span>
+                        </a>
+                    </li>
+                    <!--
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#!">
+                            <span class="fa-stack fa-lg">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                -->
+                    <div class="small text-center text-muted fst-italic">Copyright &copy; Throttlemetrics 2026</div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

@@ -34,6 +34,7 @@ urlpatterns = [
     path("Antonelli-vs-Norris-Madrid/", views.post6, name="post6"),
     path("LMGTEpro-vs-LMGTEam/", views.post7, name="post7"),
     path("How-Much-Does-Track-Experience-Matter/", views.post8, name="post8"),
+    path("the-Predictive-Power-of-Track-Position/", views.post9, name="post9"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
