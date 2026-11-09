@@ -40,3 +40,6 @@ def post8(request):
 
 def post9(request):
     return render(request, "myApp/post9.html", {})
+
+def post10(request):
+    return render(request, "myApp/post10.html", {})
